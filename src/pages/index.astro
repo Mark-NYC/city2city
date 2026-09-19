@@ -1,0 +1,20 @@
+---
+// PLACEHOLDER — not the homepage.
+// Exists so `npm run dev` serves something and the foundation is verifiably
+// runnable. The real homepage will be designed and built deliberately later.
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { SITE_TITLE } from "@/consts";
+---
+
+<BaseLayout title={SITE_TITLE}>
+  <main style="max-width: var(--content-max-width); margin: 0 auto; padding: 4rem var(--space);">
+    <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.8rem;">
+      City2City Church
+    </p>
+    <h1>Foundation ready.</h1>
+    <p>
+      Placeholder page. The technical foundation is in place; the homepage has
+      not been designed or built yet.
+    </p>
+  </main>
+</BaseLayout>

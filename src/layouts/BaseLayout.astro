@@ -1,0 +1,25 @@
+---
+// The single top-level page shell. Every page should render inside a layout so
+// <head>, global styles, and document structure stay in one place. Add shared
+// header/footer/nav here when those exist.
+import BaseHead from "@/components/BaseHead.astro";
+import "@/styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
