@@ -1,6 +1,7 @@
 ---
-// Immersions — the primary conversion page. Structure is ready for real dates
-// and an interest step; no fake events, no form backend, no SSR.
+// Immersions — the front door, framed relationally. An immersion is a way to
+// get close to the work and build relationship, NOT an application to join an
+// organization. No fake events, no form backend, no SSR.
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/Section.astro";
 import Progression from "@/components/Progression.astro";
@@ -16,18 +17,17 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
 });
 const fmtDate = (iso: string) => dateFmt.format(new Date(iso));
 
-const pathway = [
+const immersionPath = [
   { label: "Immersion", note: "You are here" },
-  { label: "Discernment" },
-  { label: "Investment" },
-  { label: "Local practice" },
-  { label: "Hub" },
+  { label: "Relationship" },
+  { label: "Shared practice" },
+  { label: "Ongoing collaboration" },
 ];
 ---
 
 <BaseLayout
   title="Immersions — City2City"
-  description="An immersion is the front door: get close to the work, meet practitioners, and discern deeper relationship."
+  description="An immersion is a way to get close to practitioners doing the work, go into the harvest together, and build relationship — not an application to join."
 >
   <section class="hero">
     <div class="container">
@@ -38,9 +38,9 @@ const pathway = [
         Come Get Your Boots Muddy
       </h1>
       <p class="lead hero__lead" data-reveal>
-        Come into a city. Get around practitioners doing the work. See the
-        rhythms up close, build relationship, and discern together whether
-        there's something worth continuing.
+        Come spend time with practitioners doing the work. Go into the harvest
+        together. See the rhythms up close, build relationship, learn from one
+        another — and see where collaboration might lead.
       </p>
       <div class="hero__actions" data-reveal>
         <Button href="#dates" variant="primary">
@@ -60,13 +60,13 @@ const pathway = [
   <Section eyebrow="What it is" title="Get close to the work." narrow>
     <div class="prose stack" data-reveal>
       <p>
-        An immersion is not a conference or a class. It's time with
-        practitioners who have muddy boots, in a city where disciples and
+        An immersion isn't a conference, a class, or an application. It's time
+        with practitioners who have muddy boots, in a city where disciples and
         churches are actually multiplying.
       </p>
       <p>
         It's for practitioners already pursuing multiplication in their own city
-        who want to run with others doing the same.
+        who want to build relationship with others doing the same.
       </p>
     </div>
   </Section>
@@ -95,13 +95,17 @@ const pathway = [
   <section class="section dark">
     <div class="container">
       <p class="eyebrow" data-reveal>
-        Where it leads
+        Where it can lead
       </p>
-      <p class="lead" style="margin-top:1rem;max-width:32ch;" data-reveal>
-        An immersion is the first step of a longer pathway, walked together.
+      <p class="lead" style="margin-top:1rem;max-width:34ch;" data-reveal>
+        No pipeline, no admission. Just relationship and shared practice that
+        may grow into ongoing collaboration.
       </p>
       <div style="margin-top:2rem;" data-reveal>
-        <Progression steps={pathway} ariaLabel="Immersion pathway" />
+        <Progression
+          steps={immersionPath}
+          ariaLabel="From immersion to ongoing collaboration"
+        />
       </div>
     </div>
   </section>
@@ -109,9 +113,9 @@ const pathway = [
   <Section eyebrow="Interested?" title="Tell us about your city." narrow>
     {/* Placeholder — no form backend yet; conversion mechanics still open. */}
     <p class="prose" data-reveal>
-      An interest step (form or contact) will live here once we decide how to
-      capture and follow up with practitioners. For now, the primary action
-      points here.
+      A way to start a conversation (form or contact) will live here once we
+      decide how best to follow up with practitioners. For now, the primary
+      action points here.
     </p>
     <div style="margin-top:2rem;" data-reveal>
       <Button href={primaryCta.href} variant="primary">

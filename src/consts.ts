@@ -6,4 +6,4 @@
 export const SITE_TITLE = "City2City Church";
 
 export const SITE_DESCRIPTION =
-  "A church of churches — local practitioners making disciples, leading churches, and pursuing multiplication together across cities.";
+  "A church of churches — local churches pursuing multiplication in their own cities and collaborating with practitioners in other cities. Local in identity, shared in mission.";

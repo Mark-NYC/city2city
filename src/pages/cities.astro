@@ -1,6 +1,7 @@
 ---
-// Cities — evidence, fruit, and stories, with room for a future hub map.
-// Restrained and honest: no invented cities, statistics, or testimonials.
+// Cities — where local practitioners are doing the work and collaborating with
+// others. NOT a directory of City2City branches. Local churches keep their own
+// identity and leadership. No invented cities, statistics, or testimonials.
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/Section.astro";
 import Figure from "@/components/Figure.astro";
@@ -9,7 +10,7 @@ import { cities } from "@/data/cities";
 
 <BaseLayout
   title="Cities — City2City"
-  description="Where practitioners are pursuing multiplication, and the fruit being stewarded city to city."
+  description="Places where practitioners are doing the work locally and collaborating with others across cities. Local churches with their own leadership — not branches."
 >
   <section class="hero">
     <div class="container">
@@ -20,49 +21,42 @@ import { cities } from "@/data/cities";
         Where the work is happening.
       </h1>
       <p class="lead hero__lead" data-reveal>
-        Existing and emerging hubs, and the fruit being stewarded together —
-        added only as cities report real evidence.
+        Local churches and practitioners doing the work in their own cities —
+        and choosing to collaborate with others. These aren't branches. Each is
+        its own local work, with its own leadership.
       </p>
     </div>
   </section>
 
-  <Section eyebrow="Map" title="Existing and emerging hubs">
+  <Section eyebrow="Across cities" title="Local works, running together.">
     <Figure
       data-reveal
       ratio="16 / 8"
       tone="dark"
-      caption="A future map of existing and emerging hub cities. No locations shown until confirmed."
+      caption="A future map showing cities where practitioners are doing the work and collaborating — shown as peers, not a network chart. No locations until confirmed."
     />
   </Section>
 
   <Section eyebrow="Evidence" title="City by city">
     {cities.length === 0 ? (
       <p class="prose" data-reveal>
-        City stories and fruit will be added here.
+        Stories and fruit from local works will be added here.
       </p>
     ) : (
-      <div class="evidence">
-        {cities.map((city) => (
-          <div data-reveal>
-            <p class="evidence__city">{city.name}</p>
-            {city.placeholder ? (
+      <>
+        <p class="prose" data-reveal>
+          What God is doing through local churches and the relationships between
+          them — added only as practitioners share real stories.
+        </p>
+        <div class="evidence" style="margin-top:2.5rem;">
+          {cities.map((city) => (
+            <div data-reveal>
+              <p class="evidence__city">{city.name}</p>
               <p class="evidence__ph">Story &amp; fruit coming soon.</p>
-            ) : (
-              <ul class="evidence__fruit">
-                <li>
-                  Baptisms <b>{city.fruit?.baptisms ?? "—"}</b>
-                </li>
-                <li>
-                  Churches <b>{city.fruit?.churches ?? "—"}</b>
-                </li>
-                <li>
-                  Stream depth <b>{city.fruit?.streamDepth ?? "—"}</b>
-                </li>
-              </ul>
-            )}
-          </div>
-        ))}
-      </div>
+            </div>
+          ))}
+        </div>
+      </>
     )}
   </Section>
 </BaseLayout>

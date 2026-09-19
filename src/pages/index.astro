@@ -1,9 +1,9 @@
 ---
-// Homepage — first polished visual pass.
-// Continuous editorial narrative (not 10 uniform sections). Preserves the
-// approved story and language: a church of churches → muddy boots → shared life
-// → multiplication → city-to-city → the pathway → immersions → evidence →
-// larger vision → explore an immersion. No invented stats, events, or hubs.
+// Homepage — positioning correction pass (visual system unchanged).
+// City2City is NOT an organization churches join or come under. The substance
+// stays local; City2City is the collaboration between local works. Narrative:
+// identity → tension → muddy boots → local/shared distinction → multiplication
+// → city-to-city (horizontal) → immersions (relational) → evidence → vision.
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/Section.astro";
 import Progression from "@/components/Progression.astro";
@@ -11,47 +11,31 @@ import Button from "@/components/Button.astro";
 import Figure from "@/components/Figure.astro";
 import { primaryCta } from "@/data/nav";
 import { cities } from "@/data/cities";
-import { immersions } from "@/data/immersions";
 
-const sharedLife = [
-  {
-    num: "Essence",
-    title: "We do the work locally.",
-    body: "Practitioners with muddy boots — making disciples and leading churches in their own cities.",
-  },
-  {
-    num: "Stewardship",
-    title: "We watch the fruit together.",
-    body: "We pay attention, city to city, to what God has entrusted to us — and steward it honestly.",
-  },
-  {
-    num: "Rhythms",
-    title: "We share a life.",
-    body: "We pray, learn, carry each other's barriers, and plan — then go into the harvest together.",
-  },
-];
-
+// What collaboration between local works actually looks like.
 const collaboration = [
-  { label: "Local bands" },
-  { label: "City-to-city rhythms" },
-  { label: "Annual gathering" },
-  { label: "New hubs" },
+  "Pray together",
+  "Share what we're learning",
+  "Steward what God is doing",
+  "Work through barriers",
+  "Support one another",
+  "Go into the harvest together",
 ];
 
-const pathway = [
+// Public-facing progression — relationship, not an admissions pipeline.
+const immersionPath = [
   { label: "Immersion" },
-  { label: "Discernment" },
-  { label: "Investment" },
-  { label: "Local practice" },
-  { label: "Hub" },
+  { label: "Relationship" },
+  { label: "Shared practice" },
+  { label: "Ongoing collaboration" },
 ];
 ---
 
 <BaseLayout
   title="City2City — A Church of Churches"
-  description="Local churches pursuing multiplication in their cities, collaborating city to city to see disciples, churches, leaders, and new hubs multiply."
+  description="Local churches pursuing multiplication in their own cities and collaborating with churches and practitioners in other cities for the sake of the gospel."
 >
-  {/* 1 — Hero */}
+  {/* 1 — Identity first */}
   <section class="hero">
     <div class="container">
       <p class="eyebrow" data-reveal>
@@ -61,8 +45,9 @@ const pathway = [
         A Church of Churches
       </h1>
       <p class="lead hero__lead" data-reveal>
-        Local churches pursuing multiplication in their cities — collaborating
-        across cities so disciples, churches, leaders, and new hubs multiply.
+        Local churches pursuing multiplication in their own cities — and
+        collaborating with churches and practitioners in other cities, for the
+        sake of the gospel.
       </p>
       <div class="hero__actions" data-reveal>
         <Button href={primaryCta.href} variant="primary">
@@ -77,21 +62,21 @@ const pathway = [
       <Figure
         ratio="16 / 8"
         tone="dark"
-        caption="Practitioners together on a city street or doorway — real people, real neighborhood, not a stage."
+        caption="Practitioners together on a city street or in a doorway — real people, a real neighborhood, not a stage."
       />
     </div>
   </section>
 
-  {/* 2 — Tension (release into a dark band) */}
+  {/* 2 — Tension */}
   <section class="section dark">
     <div class="container">
       <p class="statement" data-reveal>
-        You don't need another conference, curriculum, or network to join.
+        Multiplication was never meant to happen alone.
       </p>
       <p class="lead" style="margin-top:1.75rem;" data-reveal>
-        You need other practitioners with muddy boots who are pursuing
-        multiplication too. If a few of you in your city are actually doing this
-        — this is for you.
+        You don't need another organization to come under. You need
+        relationships with other practitioners who are actually doing the work —
+        in their cities, like you are in yours.
       </p>
     </div>
   </section>
@@ -102,18 +87,18 @@ const pathway = [
       <div class="stack" data-reveal>
         <p class="eyebrow">Muddy boots</p>
         <h2 class="section__title" style="margin-top:0;">
-          A hub is built by people doing the work.
+          It starts with people doing the work.
         </h2>
         <p class="prose">
-          Not people talking about multiplication — practitioners in the field.
-          At minimum, leaders carry real local responsibility and are leading at
-          least a couple of churches.
+          Collaboration between cities only means something when the local work
+          is real. Not people who agree with multiplication in theory —
+          practitioners carrying responsibility in an actual place.
         </p>
         <ul class="practices">
           <li>Making disciples</li>
           <li>Leading churches</li>
           <li>Pursuing multiplication</li>
-          <li>Stewarding the work</li>
+          <li>Carrying local responsibility</li>
         </ul>
       </div>
       <Figure
@@ -124,30 +109,33 @@ const pathway = [
     </div>
   </section>
 
-  {/* 4 — Shared life */}
-  <Section
-    eyebrow="Shared life"
-    title="More than a network. A shared way of life."
-  >
-    <div class="cols cols--3">
-      {sharedLife.map((part) => (
-        <div class="stack-sm" data-reveal>
-          <p class="col__num">{part.num}</p>
-          <h3 class="col__title">{part.title}</h3>
-          <p class="col__body">{part.body}</p>
-        </div>
-      ))}
+  {/* 4 — The distinction: local in identity, shared in mission */}
+  <Section eyebrow="Local in identity. Shared in mission.">
+    <div class="measure" data-reveal>
+      <p class="statement" style="font-size:var(--fs-h2);">
+        City2City doesn't oversee local churches. It exists to help local
+        churches collaborate.
+      </p>
+      <p class="prose" style="margin-top:1.5rem;">
+        Every local work keeps its own leadership, identity, and responsibility.
+        City2City lives in what happens between them:
+      </p>
     </div>
+    <ul class="practices" style="margin-top:2rem;max-width:52rem;" data-reveal>
+      {collaboration.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
   </Section>
 
-  {/* 5 — Multiplication (memorable dark moment) */}
+  {/* 5 — Multiplication (outward, not a hierarchy) */}
   <section class="section dark">
     <div class="container">
       <p class="eyebrow" data-reveal>
         Multiplication
       </p>
       <p class="prose" style="margin-top:1rem;" data-reveal>
-        Not an org chart. Fruit spreading outward, city to city.
+        Not a hierarchy. Fruit spreading outward, city to city.
       </p>
       <div class="multiply" style="margin-top:2.5rem;" data-reveal>
         <span class="multiply__term">Disciples</span>
@@ -171,20 +159,24 @@ const pathway = [
     </div>
   </section>
 
-  {/* 6 — City to city collaboration */}
+  {/* 6 — City to city (horizontal, decentralized) */}
   <section class="section">
     <div class="container split split--text-wide">
       <div class="stack" data-reveal>
         <p class="eyebrow">City to city</p>
         <h2 class="section__title" style="margin-top:0;">
-          Cities that run together.
+          Strong local work. Real relationships across cities.
         </h2>
         <p class="prose">
-          Local bands stay connected through simple, regular rhythms — not
-          programs. Then they gather in person once a year to plan and go into
-          the harvest together.
+          No headquarters. No one directing the work from above. Practitioners
+          choosing to run together — sharing responsibility for multiplication
+          beyond their own backyard.
         </p>
-        <Progression steps={collaboration} ariaLabel="How cities collaborate" />
+        <ul class="practices" aria-label="Cities collaborating as peers">
+          <li>Your city</li>
+          <li>Another city</li>
+          <li>Another city</li>
+        </ul>
       </div>
       <Figure
         data-reveal
@@ -195,7 +187,7 @@ const pathway = [
     </div>
   </section>
 
-  {/* 7 — Immersions (primary conversion) */}
+  {/* 7 — Immersions (relational, not recruitment) */}
   <section class="section dark">
     <div class="container split split--media-wide">
       <div class="stack" data-reveal>
@@ -204,12 +196,15 @@ const pathway = [
           Come Get Your Boots Muddy
         </h2>
         <p class="lead">
-          Come into a city. Get around practitioners doing the work. See the
-          rhythms up close, build real relationship, and discern together
-          whether there's something worth continuing.
+          Spend time with practitioners doing the work. Go into the harvest
+          together. See the rhythms up close, build real relationship, and learn
+          from one another — and see where collaboration might lead.
         </p>
-        <ol class="pathway" aria-label="The pathway" style="margin-top:0.5rem;">
-          {pathway.map((step) => (
+        <ol
+          class="pathway"
+          aria-label="From immersion to ongoing collaboration"
+        >
+          {immersionPath.map((step) => (
             <li>{step.label}</li>
           ))}
         </ol>
@@ -217,11 +212,6 @@ const pathway = [
           <Button href={primaryCta.href} variant="ghost">
             {primaryCta.label}
           </Button>
-          {immersions.length === 0 && (
-            <p class="prose" style="margin-top:1rem;font-size:0.9rem;">
-              Upcoming dates and locations are posted on the immersions page.
-            </p>
-          )}
         </div>
       </div>
       <Figure
@@ -234,30 +224,17 @@ const pathway = [
   </section>
 
   {/* 8 — Evidence */}
-  <Section eyebrow="Evidence" title="Real work, in real cities.">
+  <Section eyebrow="Evidence" title="Real work. Real cities.">
     <p class="prose">
-      Fruit and practitioner stories, city by city — added as cities steward and
-      report real evidence, never invented.
+      What God is doing through local churches and the relationships between
+      them — added as practitioners share real stories and fruit. Never
+      invented, never a directory of branches.
     </p>
     <div class="evidence" style="margin-top:2.5rem;">
       {cities.map((city) => (
         <div data-reveal>
           <p class="evidence__city">{city.name}</p>
-          {city.placeholder ? (
-            <p class="evidence__ph">Story &amp; fruit coming soon.</p>
-          ) : (
-            <ul class="evidence__fruit">
-              <li>
-                Baptisms <b>{city.fruit?.baptisms ?? "—"}</b>
-              </li>
-              <li>
-                Churches <b>{city.fruit?.churches ?? "—"}</b>
-              </li>
-              <li>
-                Stream depth <b>{city.fruit?.streamDepth ?? "—"}</b>
-              </li>
-            </ul>
-          )}
+          <p class="evidence__ph">Story &amp; fruit coming soon.</p>
         </div>
       ))}
     </div>
@@ -270,8 +247,8 @@ const pathway = [
         The vision
       </p>
       <p class="statement" style="max-width:20ch;margin-top:1rem;" data-reveal>
-        What if every major city had a band of practitioners pursuing
-        multiplication — and stewarding it together?
+        Multiplication spreading through local churches that increasingly run
+        together, city to city.
       </p>
     </div>
   </section>
