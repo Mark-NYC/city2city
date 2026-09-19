@@ -1,0 +1,20 @@
+---
+// Consistent page section: vertical rhythm, centered container, optional
+// eyebrow + heading. Keeps the homepage sections structurally uniform.
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  class?: string;
+}
+
+const { id, eyebrow, title, class: className } = Astro.props;
+---
+
+<section id={id} class:list={["section", className]}>
+  <div class="container">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    {title && <h2 class="section__title">{title}</h2>}
+    <slot />
+  </div>
+</section>

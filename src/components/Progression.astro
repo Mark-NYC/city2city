@@ -1,0 +1,24 @@
+---
+// Renders an ordered sequence of steps (A → B → C) with connectors.
+// Reused for the stewardship, collaboration, and involvement pathways.
+interface Step {
+  label: string;
+  sub?: string;
+}
+
+interface Props {
+  steps: Step[];
+  ariaLabel?: string;
+}
+
+const { steps, ariaLabel } = Astro.props;
+---
+
+<ol class="progression" aria-label={ariaLabel}>
+  {steps.map((step) => (
+    <li class="progression__step">
+      <span class="progression__label">{step.label}</span>
+      {step.sub && <span class="progression__sub">{step.sub}</span>}
+    </li>
+  ))}
+</ol>

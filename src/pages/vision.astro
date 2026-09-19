@@ -1,0 +1,81 @@
+---
+// Vision / About — the identity and framework. STRUCTURAL PASS (draft copy).
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Section.astro";
+import Progression from "@/components/Progression.astro";
+import Button from "@/components/Button.astro";
+import { primaryCta } from "@/data/nav";
+
+const framework = [
+  {
+    eyebrow: "Essence",
+    title: "Muddy boots",
+    body: "Local leaders are actively doing the work — making disciples, leading at least a couple of churches, and pursuing multiplication in their city.",
+  },
+  {
+    eyebrow: "Stewardship",
+    title: "Fruit stewarded together",
+    body: "Local bands steward their work together. Across cities we minimally steward baptisms, churches, and stream depth.",
+  },
+  {
+    eyebrow: "Rhythms",
+    title: "How cities collaborate",
+    body: "Regular city-to-city calls for prayer, stewardship, needs, support, learning, and planning — plus an annual in-person gathering.",
+  },
+  {
+    eyebrow: "Expansion",
+    title: "New hubs emerge",
+    body: "We want to see additional functioning hub cities emerge. Immersions are a primary way we identify practitioners and cities for deeper investment.",
+  },
+];
+
+const pathway = [
+  { label: "Immersion" },
+  { label: "Discernment" },
+  { label: "Investment" },
+  { label: "Local practice" },
+  { label: "Hub" },
+];
+---
+
+<BaseLayout
+  title="Vision — City2City"
+  description="City2City is a church of churches: local practitioners pursuing multiplication in their cities and stewarding the work together, city to city."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Vision</p>
+      <h1>A church of churches.</h1>
+      <p class="hero__lead">
+        Local churches and bands of practitioners actively making disciples,
+        leading churches, and pursuing multiplication locally — collaborating
+        across cities.
+      </p>
+    </div>
+  </section>
+
+  {framework.map((part) => (
+    <Section eyebrow={part.eyebrow} title={part.title}>
+      <div class="prose">
+        <p>{part.body}</p>
+      </div>
+    </Section>
+  ))}
+
+  <Section eyebrow="Expansion" title="The pathway">
+    <div class="prose">
+      <p>
+        People don't simply join City2City. Relationship and alignment develop
+        through doing the work together.
+      </p>
+    </div>
+    <div style="margin-top: 2rem;">
+      <Progression steps={pathway} ariaLabel="Pathway to becoming a hub" />
+    </div>
+    <div style="margin-top: 2rem;">
+      <Button href={primaryCta.href} variant="primary">
+        {primaryCta.label}
+      </Button>
+    </div>
+  </Section>
+</BaseLayout>

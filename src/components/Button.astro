@@ -1,0 +1,14 @@
+---
+// Link styled as a button. Used for all primary/secondary calls to action.
+interface Props {
+  href: string;
+  variant?: "primary" | "secondary";
+  class?: string;
+}
+
+const { href, variant = "primary", class: className } = Astro.props;
+---
+
+<a href={href} class:list={["btn", `btn--${variant}`, className]}>
+  <slot />
+</a>

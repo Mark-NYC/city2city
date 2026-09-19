@@ -1,0 +1,48 @@
+---
+// Cities — evidence, fruit, and stories, plus room for a future hub map.
+// STRUCTURAL PASS. No invented cities, statistics, or testimonials.
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Section.astro";
+import CityCard from "@/components/CityCard.astro";
+import { cities } from "@/data/cities";
+---
+
+<BaseLayout
+  title="Cities — City2City"
+  description="Where practitioners are pursuing multiplication, and the fruit being stewarded city to city."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Cities</p>
+      <h1>Where the work is happening.</h1>
+      <p class="hero__lead">
+        Existing and emerging hubs, and the fruit being stewarded together —
+        baptisms, churches, and stream depth.
+      </p>
+    </div>
+  </section>
+
+  <Section eyebrow="Map" title="Existing and emerging hubs">
+    <div class="placeholder-note" style="display:block;">
+      A map of existing and emerging hubs will live here once locations are
+      confirmed. No hub locations are shown yet.
+    </div>
+  </Section>
+
+  <Section eyebrow="Evidence" title="City by city">
+    {cities.length === 0 ? (
+      <p class="placeholder-note">City stories and fruit will be added here.</p>
+    ) : (
+      <>
+        <div class="card-grid">
+          {cities.map((city) => (
+            <CityCard city={city} />
+          ))}
+        </div>
+        <p class="placeholder-note" style="margin-top: 1rem;">
+          Placeholder cards — real city data and stories not yet added.
+        </p>
+      </>
+    )}
+  </Section>
+</BaseLayout>

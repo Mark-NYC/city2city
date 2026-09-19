@@ -1,0 +1,18 @@
+---
+// Global site footer. Minimal by design.
+import { primaryNav, primaryCta } from "@/data/nav";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p>&copy; {year} City2City. A church of churches.</p>
+    <nav aria-label="Footer">
+      {primaryNav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+      <a href={primaryCta.href}>{primaryCta.label}</a>
+    </nav>
+  </div>
+</footer>

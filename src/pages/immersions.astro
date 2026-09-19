@@ -1,0 +1,99 @@
+---
+// Immersions — the primary conversion page. STRUCTURAL PASS.
+// Structure is ready for real dates/locations and an interest step, but no
+// fake events are invented and no form backend is wired up yet.
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Section from "@/components/Section.astro";
+import Progression from "@/components/Progression.astro";
+import { immersions } from "@/data/immersions";
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+const fmtDate = (iso: string) => dateFmt.format(new Date(iso));
+
+const pathway = [
+  { label: "Immersion", sub: "You are here" },
+  { label: "Discernment" },
+  { label: "Investment" },
+  { label: "Local practice" },
+  { label: "Hub" },
+];
+---
+
+<BaseLayout
+  title="Immersions — City2City"
+  description="An immersion is the front door: get close to the work, meet practitioners, and discern deeper relationship."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Front door</p>
+      <h1>Come Get Your Boots Muddy</h1>
+      <p class="hero__lead">
+        An immersion is how you get close to the work — meeting practitioners,
+        seeing multiplication up close, and discerning whether deeper
+        relationship makes sense.
+      </p>
+    </div>
+  </section>
+
+  <Section eyebrow="What it is" title="Get close to the work">
+    <div class="prose stack">
+      <p>
+        An immersion is not a conference or a class. It's time with
+        practitioners who have muddy boots, in a city where disciples and
+        churches are actually multiplying.
+      </p>
+      <p>
+        It's for practitioners already pursuing multiplication in their own city
+        who want to run with others doing the same.
+      </p>
+    </div>
+  </Section>
+
+  <Section eyebrow="Upcoming" title="Dates &amp; locations">
+    {immersions.length === 0 ? (
+      <p class="placeholder-note">
+        Upcoming immersion dates and locations will be posted here. Check back
+        soon.
+      </p>
+    ) : (
+      <ul class="card-grid" style="list-style:none; padding:0;">
+        {immersions.map((event) => (
+          <li class="card">
+            <h3 style="font-size: var(--text-lg);">{event.city}</h3>
+            <p style="color: var(--color-muted);">
+              {fmtDate(event.startDate)}
+              {event.endDate ? ` – ${fmtDate(event.endDate)}` : ""}
+            </p>
+            <p>
+              <span class="badge">{event.status}</span>
+            </p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </Section>
+
+  <Section eyebrow="Where it leads" title="This is the first step">
+    <div class="prose">
+      <p>
+        You don't simply join City2City. An immersion is the beginning of a
+        longer pathway walked together.
+      </p>
+    </div>
+    <div style="margin-top: 2rem;">
+      <Progression steps={pathway} ariaLabel="Immersion pathway" />
+    </div>
+  </Section>
+
+  <Section eyebrow="Interested?" title="Tell us about your city">
+    {/* Placeholder — no form backend yet. Interest capture to be designed. */}
+    <div class="placeholder-note" style="display:block;">
+      An interest / application step will go here (form or contact) once we
+      decide how to capture and follow up with practitioners.
+    </div>
+  </Section>
+</BaseLayout>
