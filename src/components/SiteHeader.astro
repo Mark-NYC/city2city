@@ -1,8 +1,6 @@
 ---
-// Global site header: brand, primary nav, and the emphasized primary CTA.
-// Responsive: collapses to a toggle menu below ~48rem. The small inline script
-// is the only client-side JS on the site.
-import Button from "@/components/Button.astro";
+// Global header: wordmark, minimal nav, emphasized CTA. Sticky with a hairline
+// that appears on scroll; full-screen overlay menu on mobile.
 import { primaryNav, primaryCta } from "@/data/nav";
 
 const pathname = Astro.url.pathname;
@@ -12,7 +10,7 @@ const isCurrent = (href: string) =>
 
 <header class="site-header">
   <div class="container site-header__inner">
-    <a href="/" class="site-header__brand">
+    <a href="/" class="brand">
       City2City
     </a>
 
@@ -20,7 +18,6 @@ const isCurrent = (href: string) =>
       class="nav__toggle"
       aria-expanded="false"
       aria-controls="primary-nav"
-      aria-label="Toggle navigation"
       data-nav-toggle
     >
       Menu
@@ -39,9 +36,10 @@ const isCurrent = (href: string) =>
           </li>
         ))}
       </ul>
-      <Button href={primaryCta.href} variant="primary">
+      <a href={primaryCta.href} class="btn btn--primary nav__cta">
         {primaryCta.label}
-      </Button>
+        <span aria-hidden="true">→</span>
+      </a>
     </nav>
   </div>
 </header>
@@ -49,9 +47,19 @@ const isCurrent = (href: string) =>
 <script>
   const toggle = document.querySelector("[data-nav-toggle]");
   const nav = document.getElementById("primary-nav");
-  toggle?.addEventListener("click", () => {
-    const open = nav?.getAttribute("data-open") === "true";
-    nav?.setAttribute("data-open", String(!open));
-    toggle.setAttribute("aria-expanded", String(!open));
+  const setOpen = (open: boolean) => {
+    nav?.setAttribute("data-open", String(open));
+    toggle?.setAttribute("aria-expanded", String(open));
+    if (toggle) toggle.textContent = open ? "Close" : "Menu";
+    document.body.style.overflow = open ? "hidden" : "";
+  };
+  toggle?.addEventListener("click", () =>
+    setOpen(nav?.getAttribute("data-open") !== "true"),
+  );
+  nav
+    ?.querySelectorAll("a")
+    .forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
   });
 </script>

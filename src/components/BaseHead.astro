@@ -1,6 +1,6 @@
 ---
-// Central place for document <head> metadata: title, description, canonical
-// URL, and social (Open Graph / Twitter) tags. Rendered inside BaseLayout.
+// Central document <head>: metadata, SEO/social tags, fonts, and the no-JS
+// guard that keeps scroll-reveal content visible when JS is unavailable.
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 
 interface Props {
@@ -21,12 +21,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImage = image ? new URL(image, Astro.site) : undefined;
 ---
 
+{/* Mark JS as available before paint so reveal styles only hide when JS runs. */}
+<script is:inline>
+  document.documentElement.classList.add("js");
+</script>
+
 <!-- Global metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#16120d" />
 
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..560;1,9..144,400..560&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+/>
 
 <!-- Primary meta -->
 <title>{title}</title>

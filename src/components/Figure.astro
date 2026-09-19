@@ -1,0 +1,49 @@
+---
+// Image slot. Until real photography exists it renders an intentional,
+// on-brand placeholder that also documents the shot we need. When a real image
+// is supplied, pass `src` (an imported asset) and it renders optimized instead.
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  /** What the photograph should show. Doubles as alt text / caption. */
+  caption: string;
+  /** CSS aspect-ratio, e.g. "4 / 3", "4 / 5", "16 / 9", "1 / 1". */
+  ratio?: string;
+  tone?: "paper" | "clay" | "dark";
+  /** Supply an imported image to render a real optimized photo. */
+  src?: ImageMetadata;
+  class?: string;
+  /** Allow pass-through attributes (e.g. data-reveal) onto the figure. */
+  [key: `data-${string}`]: unknown;
+}
+
+const {
+  caption,
+  ratio = "4 / 3",
+  tone = "paper",
+  src,
+  class: className,
+  ...rest
+} = Astro.props;
+---
+
+<figure class:list={["figure", `figure--${tone}`, className]} {...rest}>
+  {src ? (
+    <Image
+      src={src}
+      alt={caption}
+      style={`aspect-ratio:${ratio};width:100%;height:auto;object-fit:cover;border-radius:var(--radius);`}
+    />
+  ) : (
+    <div
+      class="figure__ph"
+      role="img"
+      aria-label={`Photo needed — ${caption}`}
+      style={`--ratio:${ratio}`}
+    >
+      <span class="figure__tag">Photo needed</span>
+      <span class="figure__cap">{caption}</span>
+    </div>
+  )}
+</figure>

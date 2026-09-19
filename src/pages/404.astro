@@ -1,12 +1,19 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
 ---
 
-<BaseLayout title="Page not found — City2City Church">
-  <main style="max-width: var(--content-max-width); margin: 0 auto; padding: 4rem var(--space);">
-    <h1>Page not found</h1>
-    <p>
-      <a href="/">Return home</a>
-    </p>
-  </main>
+<BaseLayout title="Page not found — City2City">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1 class="hero__title">This page went into the harvest.</h1>
+      <p class="lead hero__lead">We couldn't find what you were looking for.</p>
+      <div class="hero__actions">
+        <Button href="/" variant="primary">
+          Back home
+        </Button>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

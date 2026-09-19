@@ -1,6 +1,6 @@
 ---
-// The single top-level page shell. Every page renders inside this layout so
-// <head>, global styles, header, and footer stay in one place.
+// Top-level page shell. Every page renders inside this layout so <head>,
+// global styles, header, and footer stay in one place.
 import BaseHead from "@/components/BaseHead.astro";
 import SiteHeader from "@/components/SiteHeader.astro";
 import SiteFooter from "@/components/SiteFooter.astro";
@@ -22,9 +22,39 @@ const { title, description, image } = Astro.props;
   </head>
   <body>
     <SiteHeader />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <SiteFooter />
+
+    <script>
+      // Scroll-reveal (progressive enhancement) + scrolled-header state.
+      const reduce = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const revealables = document.querySelectorAll("[data-reveal]");
+      if (!reduce && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.setAttribute("data-revealed", "");
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+        );
+        revealables.forEach((el) => io.observe(el));
+      } else {
+        revealables.forEach((el) => el.setAttribute("data-revealed", ""));
+      }
+
+      const header = document.querySelector(".site-header");
+      const onScroll = () =>
+        header?.setAttribute("data-scrolled", String(window.scrollY > 8));
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    </script>
   </body>
 </html>

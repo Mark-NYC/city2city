@@ -1,22 +1,34 @@
 ---
-// Homepage — STRUCTURAL PASS.
-// Section order and headings follow the agreed IA. Supporting copy is
-// provisional (draft wording, using the project's own language) and styling is
-// intentionally restrained. No visual identity, no invented stats/events.
+// Homepage — first polished visual pass.
+// Continuous editorial narrative (not 10 uniform sections). Preserves the
+// approved story and language: a church of churches → muddy boots → shared life
+// → multiplication → city-to-city → the pathway → immersions → evidence →
+// larger vision → explore an immersion. No invented stats, events, or hubs.
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/Section.astro";
 import Progression from "@/components/Progression.astro";
 import Button from "@/components/Button.astro";
-import CityCard from "@/components/CityCard.astro";
+import Figure from "@/components/Figure.astro";
 import { primaryCta } from "@/data/nav";
 import { cities } from "@/data/cities";
 import { immersions } from "@/data/immersions";
 
-const stewardship = [
-  { label: "Baptisms" },
-  { label: "Churches" },
-  { label: "Stream depth" },
-  { label: "Emerging hubs" },
+const sharedLife = [
+  {
+    num: "Essence",
+    title: "We do the work locally.",
+    body: "Practitioners with muddy boots — making disciples and leading churches in their own cities.",
+  },
+  {
+    num: "Stewardship",
+    title: "We watch the fruit together.",
+    body: "We pay attention, city to city, to what God has entrusted to us — and steward it honestly.",
+  },
+  {
+    num: "Rhythms",
+    title: "We share a life.",
+    body: "We pray, learn, carry each other's barriers, and plan — then go into the harvest together.",
+  },
 ];
 
 const collaboration = [
@@ -26,7 +38,7 @@ const collaboration = [
   { label: "New hubs" },
 ];
 
-const involvement = [
+const pathway = [
   { label: "Immersion" },
   { label: "Discernment" },
   { label: "Investment" },
@@ -39,18 +51,20 @@ const involvement = [
   title="City2City — A Church of Churches"
   description="Local churches pursuing multiplication in their cities, collaborating city to city to see disciples, churches, leaders, and new hubs multiply."
 >
-  {/* 1. Hero */}
+  {/* 1 — Hero */}
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">City2City</p>
-      <h1>A Church of Churches</h1>
-      {/* Draft supporting copy — wording still open for discussion. */}
-      <p class="hero__lead">
-        Local churches pursuing multiplication in their cities, and
-        collaborating across cities to see disciples, churches, leaders, and new
-        hubs multiply.
+      <p class="eyebrow" data-reveal>
+        City2City
       </p>
-      <div class="hero__actions">
+      <h1 class="hero__title" data-reveal>
+        A Church of Churches
+      </h1>
+      <p class="lead hero__lead" data-reveal>
+        Local churches pursuing multiplication in their cities — collaborating
+        across cities so disciples, churches, leaders, and new hubs multiply.
+      </p>
+      <div class="hero__actions" data-reveal>
         <Button href={primaryCta.href} variant="primary">
           {primaryCta.label}
         </Button>
@@ -59,132 +73,227 @@ const involvement = [
         </Button>
       </div>
     </div>
+    <div class="container hero__media" data-reveal>
+      <Figure
+        ratio="16 / 8"
+        tone="dark"
+        caption="Practitioners together on a city street or doorway — real people, real neighborhood, not a stage."
+      />
+    </div>
   </section>
 
-  {/* 2. Tension — help the right practitioner self-identify */}
-  <Section eyebrow="For practitioners" title="You're already doing the work.">
-    <div class="prose stack">
-      <p>
-        You don't need another conference, curriculum, or network to join. You
-        need other practitioners with muddy boots who are pursuing
-        multiplication too.
+  {/* 2 — Tension (release into a dark band) */}
+  <section class="section dark">
+    <div class="container">
+      <p class="statement" data-reveal>
+        You don't need another conference, curriculum, or network to join.
       </p>
-      <p>
-        If there are a few of you in your city actually making disciples and
-        multiplying churches, this is for you.
+      <p class="lead" style="margin-top:1.75rem;" data-reveal>
+        You need other practitioners with muddy boots who are pursuing
+        multiplication too. If a few of you in your city are actually doing this
+        — this is for you.
       </p>
     </div>
-  </Section>
+  </section>
 
-  {/* 3. What is a hub? */}
-  <Section eyebrow="Essence" title="What is a hub?">
-    <div class="prose stack">
-      <p>
-        A hub is a band of local practitioners with <strong>muddy boots</strong>
-        — actively making disciples, leading at least a couple of churches, and
-        pursuing multiplication in their city.
-      </p>
-      <p>It's defined by doing the work, not by agreeing with a philosophy.</p>
-    </div>
-  </Section>
-
-  {/* 4. Shared stewardship */}
-  <Section eyebrow="Stewardship" title="Cities steward the fruit together.">
-    <div class="prose">
-      <p>
-        More than relational networking. Across cities we minimally steward the
-        Kingdom fruit God is producing.
-      </p>
-    </div>
-    <div style="margin-top: 2rem;">
-      <Progression steps={stewardship} ariaLabel="What we steward together" />
-    </div>
-  </Section>
-
-  {/* 5. How cities collaborate */}
-  <Section eyebrow="Rhythms" title="How cities collaborate.">
-    <div class="prose">
-      <p>
-        Local bands stay connected through simple, regular rhythms — not
-        programs.
-      </p>
-    </div>
-    <div style="margin-top: 2rem;">
-      <Progression steps={collaboration} ariaLabel="How cities collaborate" />
-    </div>
-  </Section>
-
-  {/* 6. How a new city gets involved */}
-  <Section eyebrow="Expansion" title="How a new city gets involved.">
-    <div class="prose">
-      <p>
-        You don't simply "join" City2City. Relationship and alignment develop
-        through doing the work together.
-      </p>
-    </div>
-    <div style="margin-top: 2rem;">
-      <Progression steps={involvement} ariaLabel="Pathway for a new city" />
-    </div>
-  </Section>
-
-  {/* 7. Immersions — primary conversion */}
-  <Section eyebrow="Front door" title="Come Get Your Boots Muddy">
-    <div class="prose stack">
-      <p>
-        An immersion is how you get close to the work — meeting practitioners,
-        seeing multiplication up close, and discerning whether deeper
-        relationship makes sense.
-      </p>
-      {immersions.length === 0 ? (
-        <p class="placeholder-note">
-          Upcoming immersion dates and locations will be posted here.
+  {/* 3 — Muddy boots */}
+  <section class="section">
+    <div class="container split split--media-wide">
+      <div class="stack" data-reveal>
+        <p class="eyebrow">Muddy boots</p>
+        <h2 class="section__title" style="margin-top:0;">
+          A hub is built by people doing the work.
+        </h2>
+        <p class="prose">
+          Not people talking about multiplication — practitioners in the field.
+          At minimum, leaders carry real local responsibility and are leading at
+          least a couple of churches.
         </p>
-      ) : (
-        <p>{immersions.length} upcoming immersion(s).</p>
-      )}
+        <ul class="practices">
+          <li>Making disciples</li>
+          <li>Leading churches</li>
+          <li>Pursuing multiplication</li>
+          <li>Stewarding the work</li>
+        </ul>
+      </div>
+      <Figure
+        data-reveal
+        ratio="4 / 5"
+        caption="A practitioner making disciples in an everyday setting — a home, a kitchen table, a workplace."
+      />
     </div>
-    <div style="margin-top: 1.5rem;">
-      <Button href={primaryCta.href} variant="primary">
-        {primaryCta.label}
-      </Button>
-    </div>
-  </Section>
+  </section>
 
-  {/* 8. Evidence from cities */}
-  <Section eyebrow="Evidence" title="What's happening in cities.">
-    <div class="prose">
-      <p>Real fruit and practitioner stories, city by city.</p>
-    </div>
-    <div class="card-grid" style="margin-top: 2rem;">
-      {cities.map((city) => (
-        <CityCard city={city} />
+  {/* 4 — Shared life */}
+  <Section
+    eyebrow="Shared life"
+    title="More than a network. A shared way of life."
+  >
+    <div class="cols cols--3">
+      {sharedLife.map((part) => (
+        <div class="stack-sm" data-reveal>
+          <p class="col__num">{part.num}</p>
+          <h3 class="col__title">{part.title}</h3>
+          <p class="col__body">{part.body}</p>
+        </div>
       ))}
     </div>
-    <p class="placeholder-note" style="margin-top: 1rem;">
-      Placeholder cards — real city data and stories not yet added.
-    </p>
   </Section>
 
-  {/* 9. Larger vision */}
-  <Section eyebrow="Vision" title="City to city.">
-    <div class="prose stack">
-      <p>
+  {/* 5 — Multiplication (memorable dark moment) */}
+  <section class="section dark">
+    <div class="container">
+      <p class="eyebrow" data-reveal>
+        Multiplication
+      </p>
+      <p class="prose" style="margin-top:1rem;" data-reveal>
+        Not an org chart. Fruit spreading outward, city to city.
+      </p>
+      <div class="multiply" style="margin-top:2.5rem;" data-reveal>
+        <span class="multiply__term">Disciples</span>
+        <span class="multiply__arrow" aria-hidden="true">
+          →
+        </span>
+        <span class="multiply__term">Churches</span>
+        <span class="multiply__arrow" aria-hidden="true">
+          →
+        </span>
+        <span class="multiply__term">Streams</span>
+        <span class="multiply__arrow" aria-hidden="true">
+          →
+        </span>
+        <span class="multiply__term">Hubs</span>
+        <span class="multiply__arrow" aria-hidden="true">
+          →
+        </span>
+        <span class="multiply__term">Cities</span>
+      </div>
+    </div>
+  </section>
+
+  {/* 6 — City to city collaboration */}
+  <section class="section">
+    <div class="container split split--text-wide">
+      <div class="stack" data-reveal>
+        <p class="eyebrow">City to city</p>
+        <h2 class="section__title" style="margin-top:0;">
+          Cities that run together.
+        </h2>
+        <p class="prose">
+          Local bands stay connected through simple, regular rhythms — not
+          programs. Then they gather in person once a year to plan and go into
+          the harvest together.
+        </p>
+        <Progression steps={collaboration} ariaLabel="How cities collaborate" />
+      </div>
+      <Figure
+        data-reveal
+        ratio="4 / 5"
+        tone="clay"
+        caption="Practitioners from different cities in conversation and prayer around a table."
+      />
+    </div>
+  </section>
+
+  {/* 7 — Immersions (primary conversion) */}
+  <section class="section dark">
+    <div class="container split split--media-wide">
+      <div class="stack" data-reveal>
+        <p class="eyebrow">The front door</p>
+        <h2 class="statement" style="max-width:14ch;">
+          Come Get Your Boots Muddy
+        </h2>
+        <p class="lead">
+          Come into a city. Get around practitioners doing the work. See the
+          rhythms up close, build real relationship, and discern together
+          whether there's something worth continuing.
+        </p>
+        <ol class="pathway" aria-label="The pathway" style="margin-top:0.5rem;">
+          {pathway.map((step) => (
+            <li>{step.label}</li>
+          ))}
+        </ol>
+        <div style="margin-top:0.5rem;">
+          <Button href={primaryCta.href} variant="ghost">
+            {primaryCta.label}
+          </Button>
+          {immersions.length === 0 && (
+            <p class="prose" style="margin-top:1rem;font-size:0.9rem;">
+              Upcoming dates and locations are posted on the immersions page.
+            </p>
+          )}
+        </div>
+      </div>
+      <Figure
+        data-reveal
+        ratio="4 / 5"
+        tone="dark"
+        caption="A small group going out into a neighborhood together — the harvest, not a classroom."
+      />
+    </div>
+  </section>
+
+  {/* 8 — Evidence */}
+  <Section eyebrow="Evidence" title="Real work, in real cities.">
+    <p class="prose">
+      Fruit and practitioner stories, city by city — added as cities steward and
+      report real evidence, never invented.
+    </p>
+    <div class="evidence" style="margin-top:2.5rem;">
+      {cities.map((city) => (
+        <div data-reveal>
+          <p class="evidence__city">{city.name}</p>
+          {city.placeholder ? (
+            <p class="evidence__ph">Story &amp; fruit coming soon.</p>
+          ) : (
+            <ul class="evidence__fruit">
+              <li>
+                Baptisms <b>{city.fruit?.baptisms ?? "—"}</b>
+              </li>
+              <li>
+                Churches <b>{city.fruit?.churches ?? "—"}</b>
+              </li>
+              <li>
+                Stream depth <b>{city.fruit?.streamDepth ?? "—"}</b>
+              </li>
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  {/* 9 — Larger vision */}
+  <section class="section dark">
+    <div class="container">
+      <p class="eyebrow" data-reveal>
+        The vision
+      </p>
+      <p class="statement" style="max-width:20ch;margin-top:1rem;" data-reveal>
         What if every major city had a band of practitioners pursuing
-        multiplication locally — and stewarding the work together across cities?
+        multiplication — and stewarding it together?
       </p>
     </div>
-    <div class="placeholder-note" style="margin-top: 2rem; display:block;">
-      A map of existing and emerging hubs will live here once locations are
-      confirmed.
-    </div>
-  </Section>
+  </section>
 
-  {/* 10. Final CTA */}
-  <Section title="Are you pursuing multiplication in your city?">
-    <div style="margin-top: 1.5rem;">
-      <Button href={primaryCta.href} variant="primary">
-        {primaryCta.label}
-      </Button>
+  {/* 10 — Final CTA */}
+  <section class="section">
+    <div class="container" style="text-align:center;">
+      <h2
+        class="section__title"
+        style="max-width:22ch;margin-inline:auto;"
+        data-reveal
+      >
+        Are you pursuing multiplication in your city?
+      </h2>
+      <div
+        style="margin-top:2rem;display:flex;justify-content:center;"
+        data-reveal
+      >
+        <Button href={primaryCta.href} variant="primary">
+          {primaryCta.label}
+        </Button>
+      </div>
     </div>
-  </Section>
+  </section>
 </BaseLayout>

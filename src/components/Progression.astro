@@ -1,9 +1,10 @@
 ---
-// Renders an ordered sequence of steps (A → B → C) with connectors.
-// Reused for the stewardship, collaboration, and involvement pathways.
+// Editorial pathway: an ordered, numbered sequence (A → B → C) rendered as
+// running display type rather than boxes. Reused for the involvement pathway
+// and city-to-city collaboration.
 interface Step {
   label: string;
-  sub?: string;
+  note?: string;
 }
 
 interface Props {
@@ -14,11 +15,15 @@ interface Props {
 const { steps, ariaLabel } = Astro.props;
 ---
 
-<ol class="progression" aria-label={ariaLabel}>
+<ol class="pathway" aria-label={ariaLabel}>
   {steps.map((step) => (
-    <li class="progression__step">
-      <span class="progression__label">{step.label}</span>
-      {step.sub && <span class="progression__sub">{step.sub}</span>}
+    <li>
+      {step.label}
+      {step.note && (
+        <span style="font-family:var(--font-sans);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);">
+          {step.note}
+        </span>
+      )}
     </li>
   ))}
 </ol>

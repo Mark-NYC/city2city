@@ -1,8 +1,9 @@
 ---
-// Link styled as a button. Used for all primary/secondary calls to action.
+// Link styled as a button. Variants: primary (solid ink), secondary (hairline),
+// ghost (for use on dark sections).
 interface Props {
   href: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "ghost";
   class?: string;
 }
 
@@ -11,4 +12,5 @@ const { href, variant = "primary", class: className } = Astro.props;
 
 <a href={href} class:list={["btn", `btn--${variant}`, className]}>
   <slot />
+  <span aria-hidden="true">→</span>
 </a>

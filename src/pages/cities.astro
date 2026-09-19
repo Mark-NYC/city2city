@@ -1,9 +1,9 @@
 ---
-// Cities — evidence, fruit, and stories, plus room for a future hub map.
-// STRUCTURAL PASS. No invented cities, statistics, or testimonials.
+// Cities — evidence, fruit, and stories, with room for a future hub map.
+// Restrained and honest: no invented cities, statistics, or testimonials.
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/Section.astro";
-import CityCard from "@/components/CityCard.astro";
+import Figure from "@/components/Figure.astro";
 import { cities } from "@/data/cities";
 ---
 
@@ -13,36 +13,56 @@ import { cities } from "@/data/cities";
 >
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">Cities</p>
-      <h1>Where the work is happening.</h1>
-      <p class="hero__lead">
+      <p class="eyebrow" data-reveal>
+        Cities
+      </p>
+      <h1 class="hero__title" data-reveal>
+        Where the work is happening.
+      </h1>
+      <p class="lead hero__lead" data-reveal>
         Existing and emerging hubs, and the fruit being stewarded together —
-        baptisms, churches, and stream depth.
+        added only as cities report real evidence.
       </p>
     </div>
   </section>
 
   <Section eyebrow="Map" title="Existing and emerging hubs">
-    <div class="placeholder-note" style="display:block;">
-      A map of existing and emerging hubs will live here once locations are
-      confirmed. No hub locations are shown yet.
-    </div>
+    <Figure
+      data-reveal
+      ratio="16 / 8"
+      tone="dark"
+      caption="A future map of existing and emerging hub cities. No locations shown until confirmed."
+    />
   </Section>
 
   <Section eyebrow="Evidence" title="City by city">
     {cities.length === 0 ? (
-      <p class="placeholder-note">City stories and fruit will be added here.</p>
+      <p class="prose" data-reveal>
+        City stories and fruit will be added here.
+      </p>
     ) : (
-      <>
-        <div class="card-grid">
-          {cities.map((city) => (
-            <CityCard city={city} />
-          ))}
-        </div>
-        <p class="placeholder-note" style="margin-top: 1rem;">
-          Placeholder cards — real city data and stories not yet added.
-        </p>
-      </>
+      <div class="evidence">
+        {cities.map((city) => (
+          <div data-reveal>
+            <p class="evidence__city">{city.name}</p>
+            {city.placeholder ? (
+              <p class="evidence__ph">Story &amp; fruit coming soon.</p>
+            ) : (
+              <ul class="evidence__fruit">
+                <li>
+                  Baptisms <b>{city.fruit?.baptisms ?? "—"}</b>
+                </li>
+                <li>
+                  Churches <b>{city.fruit?.churches ?? "—"}</b>
+                </li>
+                <li>
+                  Stream depth <b>{city.fruit?.streamDepth ?? "—"}</b>
+                </li>
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
     )}
   </Section>
 </BaseLayout>

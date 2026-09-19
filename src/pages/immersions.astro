@@ -1,10 +1,12 @@
 ---
-// Immersions — the primary conversion page. STRUCTURAL PASS.
-// Structure is ready for real dates/locations and an interest step, but no
-// fake events are invented and no form backend is wired up yet.
+// Immersions — the primary conversion page. Structure is ready for real dates
+// and an interest step; no fake events, no form backend, no SSR.
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Section from "@/components/Section.astro";
 import Progression from "@/components/Progression.astro";
+import Figure from "@/components/Figure.astro";
+import Button from "@/components/Button.astro";
+import { primaryCta } from "@/data/nav";
 import { immersions } from "@/data/immersions";
 
 const dateFmt = new Intl.DateTimeFormat("en-US", {
@@ -15,7 +17,7 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
 const fmtDate = (iso: string) => dateFmt.format(new Date(iso));
 
 const pathway = [
-  { label: "Immersion", sub: "You are here" },
+  { label: "Immersion", note: "You are here" },
   { label: "Discernment" },
   { label: "Investment" },
   { label: "Local practice" },
@@ -29,18 +31,34 @@ const pathway = [
 >
   <section class="hero">
     <div class="container">
-      <p class="eyebrow">Front door</p>
-      <h1>Come Get Your Boots Muddy</h1>
-      <p class="hero__lead">
-        An immersion is how you get close to the work — meeting practitioners,
-        seeing multiplication up close, and discerning whether deeper
-        relationship makes sense.
+      <p class="eyebrow" data-reveal>
+        The front door
       </p>
+      <h1 class="hero__title" data-reveal>
+        Come Get Your Boots Muddy
+      </h1>
+      <p class="lead hero__lead" data-reveal>
+        Come into a city. Get around practitioners doing the work. See the
+        rhythms up close, build relationship, and discern together whether
+        there's something worth continuing.
+      </p>
+      <div class="hero__actions" data-reveal>
+        <Button href="#dates" variant="primary">
+          See upcoming dates
+        </Button>
+      </div>
+    </div>
+    <div class="container hero__media" data-reveal>
+      <Figure
+        ratio="16 / 8"
+        tone="dark"
+        caption="Practitioners going into a neighborhood together during an immersion — the harvest, not a venue."
+      />
     </div>
   </section>
 
-  <Section eyebrow="What it is" title="Get close to the work">
-    <div class="prose stack">
+  <Section eyebrow="What it is" title="Get close to the work." narrow>
+    <div class="prose stack" data-reveal>
       <p>
         An immersion is not a conference or a class. It's time with
         practitioners who have muddy boots, in a city where disciples and
@@ -53,47 +71,52 @@ const pathway = [
     </div>
   </Section>
 
-  <Section eyebrow="Upcoming" title="Dates &amp; locations">
+  <Section id="dates" eyebrow="Upcoming" title="Dates &amp; locations">
     {immersions.length === 0 ? (
-      <p class="placeholder-note">
+      <p class="prose" data-reveal>
         Upcoming immersion dates and locations will be posted here. Check back
         soon.
       </p>
     ) : (
-      <ul class="card-grid" style="list-style:none; padding:0;">
+      <div class="evidence" data-reveal>
         {immersions.map((event) => (
-          <li class="card">
-            <h3 style="font-size: var(--text-lg);">{event.city}</h3>
-            <p style="color: var(--color-muted);">
+          <div>
+            <p class="evidence__city">{event.city}</p>
+            <p class="col__body" style="margin-top:0.35rem;">
               {fmtDate(event.startDate)}
               {event.endDate ? ` – ${fmtDate(event.endDate)}` : ""}
             </p>
-            <p>
-              <span class="badge">{event.status}</span>
-            </p>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     )}
   </Section>
 
-  <Section eyebrow="Where it leads" title="This is the first step">
-    <div class="prose">
-      <p>
-        You don't simply join City2City. An immersion is the beginning of a
-        longer pathway walked together.
+  <section class="section dark">
+    <div class="container">
+      <p class="eyebrow" data-reveal>
+        Where it leads
       </p>
+      <p class="lead" style="margin-top:1rem;max-width:32ch;" data-reveal>
+        An immersion is the first step of a longer pathway, walked together.
+      </p>
+      <div style="margin-top:2rem;" data-reveal>
+        <Progression steps={pathway} ariaLabel="Immersion pathway" />
+      </div>
     </div>
-    <div style="margin-top: 2rem;">
-      <Progression steps={pathway} ariaLabel="Immersion pathway" />
-    </div>
-  </Section>
+  </section>
 
-  <Section eyebrow="Interested?" title="Tell us about your city">
-    {/* Placeholder — no form backend yet. Interest capture to be designed. */}
-    <div class="placeholder-note" style="display:block;">
-      An interest / application step will go here (form or contact) once we
-      decide how to capture and follow up with practitioners.
+  <Section eyebrow="Interested?" title="Tell us about your city." narrow>
+    {/* Placeholder — no form backend yet; conversion mechanics still open. */}
+    <p class="prose" data-reveal>
+      An interest step (form or contact) will live here once we decide how to
+      capture and follow up with practitioners. For now, the primary action
+      points here.
+    </p>
+    <div style="margin-top:2rem;" data-reveal>
+      <Button href={primaryCta.href} variant="primary">
+        {primaryCta.label}
+      </Button>
     </div>
   </Section>
 </BaseLayout>

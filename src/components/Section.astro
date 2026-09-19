@@ -1,20 +1,25 @@
 ---
-// Consistent page section: vertical rhythm, centered container, optional
-// eyebrow + heading. Keeps the homepage sections structurally uniform.
+// Consistent page section: vertical rhythm + centered container, with an
+// optional eyebrow/title head. Used mainly on the inner pages.
 interface Props {
   id?: string;
   eyebrow?: string;
   title?: string;
   class?: string;
+  narrow?: boolean;
 }
 
-const { id, eyebrow, title, class: className } = Astro.props;
+const { id, eyebrow, title, class: className, narrow } = Astro.props;
 ---
 
 <section id={id} class:list={["section", className]}>
-  <div class="container">
-    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
-    {title && <h2 class="section__title">{title}</h2>}
+  <div class:list={["container", narrow && "container--narrow"]}>
+    {(eyebrow || title) && (
+      <div class="section__head">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        {title && <h2 class="section__title">{title}</h2>}
+      </div>
+    )}
     <slot />
   </div>
 </section>
