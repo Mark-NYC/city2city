@@ -45,6 +45,7 @@ npm run dev
 ```
 .
 ├── astro.config.mjs      # Astro config: site URL, static output, sitemap
+├── vercel.json           # Vercel deploy config (framework/build/output)
 ├── tsconfig.json         # TS strict; "@/*" path alias → src/*
 ├── eslint.config.mjs     # Flat ESLint config (astro recommended)
 ├── .prettierrc.mjs       # Prettier + astro plugin
@@ -87,24 +88,27 @@ canonical URL in `astro.config.mjs` (useful for preview deploys).
 
 ## Deployment
 
-`npm run build` outputs a fully static site to `dist/`. Any static host works.
+Deployed to **Vercel** as a static site (zero-config — no adapter needed while
+`output` is `static`). Config lives in `vercel.json`:
 
-- **Build command:** `npm run build`
-- **Publish directory:** `dist`
-- **Node version:** `22` (pinned via `.nvmrc` / `package.json` `engines`)
+- **Framework preset:** `astro`
+- **Build command:** `npm run build` (runs `astro check` then `astro build`)
+- **Output directory:** `dist`
+- **Node version:** `22` (via `package.json` `engines`; `.nvmrc` for local)
 
-No host-specific config is committed yet — see below.
+First-time setup: import the repo in the Vercel dashboard (or `vercel` CLI).
+Set any environment variables (e.g. `SITE_URL` for preview URLs) in Vercel's
+project settings — do not commit `.env`. If we later move to server rendering,
+add the `@astrojs/vercel` adapter and switch `output` (see below).
 
 ## Deferred decisions
 
 Intentionally not made yet (flag before we build in a direction that assumes
 one):
 
-- **Hosting provider** (Netlify / Vercel / Cloudflare Pages / other). The build
-  is host-agnostic; once chosen we add that host's config file.
-- **Static vs. server rendering.** Currently `output: 'static'`. If we later
-  need forms, auth, or personalization, we add an SSR adapter for the chosen
-  host.
+- **Static vs. server rendering.** Currently `output: 'static'` on Vercel with
+  no adapter. If we later need forms, auth, or personalization, add the
+  `@astrojs/vercel` adapter and switch `output` to `'server'`/hybrid.
 - **Branding** — colors, typography/fonts, logo, imagery. Placeholders only.
 - **Content / IA** — pages, navigation, and the eventual "Explore an Immersion"
   conversion flow. Nothing assumed from the current live site.
